@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task1</title>
+</head>
+<body>
+    <script>
+        "use strict";
+
+        var f = prompt('Введите строку на русском языке:', '');
+
+        function vowelLetters() {
+            var counter = 0;
+            var vowelLetterString = ["а", "о", "и", "е", "ё", "э", "ы", "у", "ю", "я"];
+            for (var i = 0; i < f.length; i++)
+                for (var j = 0; j < vowelLetterString.length; j++)
+                    if (f[i] === vowelLetterString[j]) {
+                        ++counter;
+                        break;
+                    }
+            return counter ? counter : "Нет совпадений";
+        }
+
+        console.log(vowelLetters());
+
+    </script>
+</body>
+</html>
