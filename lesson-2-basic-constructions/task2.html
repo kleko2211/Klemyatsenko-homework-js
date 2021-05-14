@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task2</title>
+</head>
+<body>
+
+    <script>
+        "use strict";
+
+        do {
+            var firstName = prompt('Ваше имя?', '');
+        } while (firstName == '' || firstName == null || !isNaN(firstName));
+
+        do {
+            var lastName = prompt('Ваша фамилия?', '');
+        } while (lastName == '' || lastName == null || !isNaN(lastName));
+
+        do {
+            var secondName = prompt('Ваше отчество?', '');
+        } while (secondName == '' || secondName == null || !isNaN(secondName));
+
+        var fullName = lastName + ' ' + firstName + ' ' + secondName;
+
+        do {
+            var age = +prompt('Ваш возраст?', '');
+        } while (age >= 100 || age == null || age <= 18 || isNaN(age));
+
+        var leapYears = parseInt(age / 4);
+        var normalYears = (age - leapYears);
+        var ageInDays = ((normalYears * 365) + (leapYears * 366));
+
+        var afterFifeYears = (age + 5);
+
+        var sex = confirm('Ваш пол - мужской?');
+        if (sex !== true) {
+            sex = 'женский'
+        } else
+            sex = 'мужской';
+
+        var pension = (age >= 60) ? 'да' : 'нет';
+
+        alert('Ваше ФИО: ' + fullName + '\n'
+            + 'Ваш возраст в годах: ' + age + '\n'
+            + 'Ваш возраст в днях: ' + ageInDays + '\n'
+            + 'Через 5 лет вам будет: ' + afterFifeYears + '\n'
+            + 'Ваш пол: ' + sex + '\n'
+            + 'Вы на пенсии? : ' + pension);
+
+    </script>
+
+</body>
+</html>
