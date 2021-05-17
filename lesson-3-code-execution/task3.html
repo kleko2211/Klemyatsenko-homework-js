@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task3</title>
+</head>
+<body>
+
+    <script>
+
+        'use strict'
+
+        var array = [];
+        var sum = 0;
+
+        function calculator() {
+
+            while (true) {
+                var value = prompt('Введите число:', '0');
+
+                if (!(value === null || value === '' || isNaN(value))) {
+                    array.push(+value);
+                    sum += +value;
+                } else break;
+            }
+            return [array, sum];
+        }
+
+        calculator()
+
+        alert(array);
+        alert(sum);
+
+    </script>
+
+</body>
+</html>
