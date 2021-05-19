@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task1</title>
+</head>
+<body>
+
+    <script>
+
+        'use strict'
+
+        var tasksCompleted = {
+            'Anna': 29,
+            'Serg': 35,
+            'Elena': 1,
+            'Anton': 99
+        };
+
+        function findBestEmployee() {
+
+            var bestEmployee = Object.keys(tasksCompleted)[0];
+            var bestValue = Object.values(tasksCompleted)[0];
+
+            for (var [key, value] of Object.entries(tasksCompleted)) {
+                if (value > bestValue) {
+                    bestValue = value;
+                    bestEmployee = key;
+                }
+            }
+            return bestEmployee;
+        }
+
+        findBestEmployee();
+        alert(findBestEmployee());
+
+    </script>
+
+</body>
+</html>
