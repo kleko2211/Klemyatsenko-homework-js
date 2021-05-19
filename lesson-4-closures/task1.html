@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task1</title>
+</head>
+<body>
+
+    <script>
+
+        'use strict'
+
+        var x = +prompt('Введите количество столбцов:', '0');
+        var y = +prompt('Введите количество строк:', '0');
+
+        function hashBoard(x, y) {
+
+            if (!(x === 0 && y === 0)) {
+
+                var board = '';
+
+                for (var i = 0; i < x; i++) {
+                    for (var j = 0; j < y; j++) {
+                        if ((i + j) % 2 === 0)
+                            board += '#';
+                        else
+                            board += ' ';
+                    }
+                    board += "\n";
+                }
+            } alert('Введите натуральные числа!');
+
+            return board;
+        }
+
+        alert(hashBoard(x, y));
+
+    </script>
+</body>
+</html>
