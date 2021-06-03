@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task1</title>
+</head>
+<body>
+
+    <script>
+
+        'use strict';
+
+        (function () {
+            function Question(question, answers, correctAnswer) {
+                this.question = question;
+                this.answers = answers;
+                this.correctAnswer = correctAnswer;
+            }
+
+            Question.prototype.showQuestion = function () {
+                console.log(this.question);
+
+                for (var i = 0; i < this.answers.length; i++) {
+                    console.log(i + ': ' + this.answers[i]);
+                }
+            }
+
+            Question.prototype.checkAnswer = function (answer) {
+
+                if (answer === this.correctAnswer) {
+                    console.log('10 points to Griffindor!');
+                } else {
+                    console.log('You shall not pass!');
+                }
+            }
+
+            var question1 = new Question('Answer to the Ultimate Question of Life, the Universe, and Everything?',
+                ['42', '43', '44'],
+                0,);
+
+            var question2 = new Question('I\'m Jack\'s ...',
+                ['I am Jack\'s cold sweat.', 'I am Jack\'s inflamed sense of rejection.', 'I am Jack\'s wasted life.',
+                    'I am Jack\'s complete lack of surprise.'],
+                3);
+
+            var question3 = new Question('DC or Marvel?',
+                ['DC', 'Marvel', 'Anime'],
+                2);
+
+            var question4 = new Question('Aragorn son of Arathorn heir of .....?',
+                ['Isildur', 'Elendil', 'Elessar', 'Gandalf'],
+                0);
+
+            var question5 = new Question('Blue or red?',
+                ['blue', 'red'],
+                2);
+
+            var questions = [question1, question2, question3, question4, question5];
+
+            var i = Math.floor(Math.random() * questions.length);
+
+            questions[i].showQuestion();
+
+            var answer = parseInt(prompt('Let\'s play the game!'));
+
+            questions[i].checkAnswer(answer);
+
+        })();
+
+    </script>
+
+</body>
+</html>
