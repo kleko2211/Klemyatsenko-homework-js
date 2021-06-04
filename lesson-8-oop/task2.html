@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task2</title>
+</head>
+<body>
+
+    <script>
+
+        'use strict';
+
+        function isPal(string) {
+            var isPalindrome = string.replace(/\s/g, '').toLowerCase();
+            return isPalindrome === isPalindrome.split('').reverse().join('');
+        }
+
+        console.log(isPal('AnnA'));
+        console.log(isPal('А роза упала на лапу Азора'));
+        console.log(isPal('Вася'));
+        console.log(isPal('12321'));
+        console.log(isPal('123212'));
+        console.log(isPal('Tenet'))
+
+    </script>
+
+</body>
+</html>
