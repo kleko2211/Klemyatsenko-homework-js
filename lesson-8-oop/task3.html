@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task3</title>
+</head>
+<body>
+
+    <script>
+
+        'use strict';
+
+        function anClean(arr) {
+
+            var totalArray = {};
+
+            for (var i = 0; i < arr.length; i++) {
+                var sort = arr[i].replace(/\s/g, '').toLowerCase().split('').sort().join('');
+                totalArray[sort] = arr[i];
+            }
+            return Object.values(totalArray);
+        }
+
+        var arr = ['киборг', 'корсет', 'ЗОВ', 'воз', 'гробик', 'костер', 'сектор', 'Eleven plus Two', 'Twelve plus one'];
+
+        console.log(anClean(arr));
+
+    </script>
+
+</body>
+</html>
