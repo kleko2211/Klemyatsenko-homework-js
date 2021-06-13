@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drink Storage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="menu">
+        <button class="enterInfo">Ввод информации о напитке</button>
+        <button class="getInfo">Получение информации о напитке</button>
+        <button class="deleteInfo">Удаление информации о напитке</button>
+        <button class="getAllInfo">Перечень всех напитков</button>
+    </div>
+
+    <script src="HashStorage.js"></script>
+    <script>
+
+        var DrinkStorage = new HashStorage();
+
+        function askDrinkName() {
+            do {
+                var drinkName = prompt('Напишите название вашего напитка');
+            } while (drinkName === '')
+
+            drinkName = drinkName.toLowerCase().trim();
+            return drinkName;
+        }
+
+        function askRecipe() {
+            var alcohol = confirm('Ваш напиток алгокольный?');
+            var drinkAlcohol;
+
+            if (alcohol) {
+                drinkAlcohol = 'да';
+            } else {
+                drinkAlcohol = 'нет';
+            }
+
+            do {
+                var recipe = prompt('напишите рецепт');
+            } while (recipe === '')
+
+            return drinkInformation = [drinkAlcohol, recipe]
+        }
+
+        function deletePrevious() {
+            if (wrapper.lastChild.classList.contains('showInfo')) {
+                wrapper.removeChild(wrapper.lastChild)
+            }
+        }
+
+        var wrapper = document.querySelector('.menu');
+        var addRecipe = document.querySelector('.enterInfo');
+        var showRecipe = document.querySelector('.getInfo');
+        var deleteRecipe = document.querySelector('.deleteInfo');
+        var showAllRecipes = document.querySelector('.getAllInfo');
+
+        addRecipe.addEventListener('click', function () {
+            DrinkStorage.addValue(askDrinkName(), askRecipe());
+        })
+        showRecipe.addEventListener('click', deletePrevious)
+        showRecipe.addEventListener('click', function () {
+            var getDrinkName = prompt('Введите название напитка');
+            getDrinkName.toLowerCase();
+            var check = DrinkStorage.getValue(getDrinkName);
+
+            if (!check) {
+                alert('Такого рецепта нет');
+            } else {
+                var elDiv = document.createElement('div');
+                elDiv.setAttribute('class', 'showInfo');
+                wrapper.appendChild(elDiv);
+                elDiv.innerHTML = `напиток: <b>${getDrinkName}</b> <br> алкогольный <b>${check[0]}</b> <br> рецепт приготовления: <br> <b>${check[1]}</b>`;
+
+            }
+        })
+        deleteRecipe.addEventListener('click', function () {
+            var getDrinkName = prompt('Введите название напитка');
+            getDrinkName.toLowerCase();
+            var check = DrinkStorage.getValue(getDrinkName);
+
+            if (!check) {
+                alert('Рецепта этого напитка нет в списке');
+            } else {
+                DrinkStorage.deleteValue(getDrinkName);
+                alert('Рецепт напитка удален')
+            }
+        })
+        showAllRecipes.addEventListener('click', deletePrevious)
+        showAllRecipes.addEventListener('click', function () {
+            var check = DrinkStorage.getKeys();
+
+            if (check.length === 0) {
+                alert('В хранилище нет ни одного рецепта');
+            } else {
+                var elWrapper = document.createElement('div');
+                elWrapper.setAttribute('class', 'showInfo');
+
+                for (var i = 0; i < check.length; i++) {
+                    var elDiv = document.createElement('div');
+                    elDiv.textContent = i + 1 + '. ' + check[i];
+                    elWrapper.appendChild(elDiv);
+                    wrapper.appendChild(elWrapper)
+                }
+            }
+
+        })
+
+    </script>
+</body>
+</html>
