@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form creation</title>
+
+    <style>
+        input, textarea, select {
+            margin: 0.5em auto;
+            max-width: 320px;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0.2em;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            cursor: pointer;
+        }
+
+        input:hover {
+            color: #333;
+        }
+
+        label {
+            width: 20%;
+        }
+
+        button {
+            width: 10%;
+            margin: 5% auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <form action="http://fe.it-academy.by/TestForm.php"
+            id="profileForm"
+            name="profileForm"
+            onsubmit='return formValidation(this)'>
+    </form>
+
+    <script src="task1.js"></script>
+
+    <script>
+
+        function formValidation(form) {
+            var error = 0;
+            var websiteName = form.websiteName.value.trim();
+            var websiteUrl = form.URL.value.trim();
+            var email = form.email.value.trim();
+
+            if (!websiteName) {
+                error = 'Заполните поле Название сайта';
+                form.websiteName.style.border = '1px solid red';
+                form.websiteName.scrollIntoView();
+            } else if (!websiteUrl) {
+                error = 'Заполните поле URL сайта';
+                form.URL.style.border = '1px solid red';
+                form.URL.scrollIntoView();
+            } else if (!email) {
+                error = 'Заполните поле E-mail для связи';
+                form.email.style.border = '1px solid red';
+                form.email.scrollIntoView();
+            }
+            if (error) {
+                alert(error);
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,38 +1,20 @@
 function HashStorage() {
-}
+    var self = this,
+        pHash = {};
 
-HashStorage.prototype.addValue = function (Key, value) {
-    this[Key] = value;
-}
-
-HashStorage.prototype.getValue = function (Key) {
-    var info;
-
-    for (let key in this) {
-        if (key === Key) {
-            info = this[key];
-        }
+    self.addValue = function (key, value) {
+        pHash[key] = value;
     }
 
-    return info;
-}
-
-HashStorage.prototype.deleteValue = function (Key) {
-    var showMessage;
-
-    for (let key in this) {
-        if (key === Key) {
-            delete this[key];
-            showMessage = true;
-            break;
-        } else {
-            showMessage = false;
-        }
+    self.getValue = function (key) {
+        return pHash[key];
     }
 
-    return showMessage;
-}
+    self.deleteValue = function (key) {
+        return delete pHash[key];
+    }
 
-HashStorage.prototype.getKeys = function () {
-    return Object.keys(this);
+    self.getKeys = function () {
+        return (Object.keys(pHash));
+    }
 }
