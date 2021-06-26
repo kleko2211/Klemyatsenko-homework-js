@@ -7,106 +7,77 @@
 </head>
 <body>
 
-    <div class="menu">
-        <button class="enterInfo">Ввод информации о напитке</button>
-        <button class="getInfo">Получение информации о напитке</button>
-        <button class="deleteInfo">Удаление информации о напитке</button>
-        <button class="getAllInfo">Перечень всех напитков</button>
+    <div class="manage-drinks">
+        <input type="button" value="Добавить напиток" onclick="addDrink()">
+        <input type="button" value="Показать информацию о напитке" onclick="showDrinkInfo()">
+        <input type="button" value="Удалить напиток" onclick="removeDrink()">
+        <input type="button" value="Показать меню напитков" onclick="showDrinksMenu()">
+        <div id="message" class="drink-info"></div>
     </div>
 
     <script src="HashStorage.js"></script>
     <script>
+        'use strict';
 
-        var DrinkStorage = new HashStorage();
+        var drinkStorage = new HashStorage();
 
-        function askDrinkName() {
-            do {
-                var drinkName = prompt('Напишите название вашего напитка');
-            } while (drinkName === '')
+        function addDrink() {
+            var drinkName = prompt('Введите навание напитка', 'Test Drink').toLowerCase().trim();
+            var fHash = {};
 
-            drinkName = drinkName.toLowerCase().trim();
-            return drinkName;
-        }
+            if (drinkName) {
+                fHash.recipe = prompt('Введите рецепт напитка', 'Test Recipe');
+                fHash.alcohole = confirm('Ваш напиток алкогольный?') ? 'да' : 'неть';
 
-        function askRecipe() {
-            var alcohol = confirm('Ваш напиток алгокольный?');
-            var drinkAlcohol;
-
-            if (alcohol) {
-                drinkAlcohol = 'да';
+                return drinkStorage.addValue(drinkName, fHash);
             } else {
-                drinkAlcohol = 'нет';
-            }
-
-            do {
-                var recipe = prompt('напишите рецепт');
-            } while (recipe === '')
-
-            return drinkInformation = [drinkAlcohol, recipe]
-        }
-
-        function deletePrevious() {
-            if (wrapper.lastChild.classList.contains('showInfo')) {
-                wrapper.removeChild(wrapper.lastChild)
+                alert('Ввод отменён');
             }
         }
 
-        var wrapper = document.querySelector('.menu');
-        var addRecipe = document.querySelector('.enterInfo');
-        var showRecipe = document.querySelector('.getInfo');
-        var deleteRecipe = document.querySelector('.deleteInfo');
-        var showAllRecipes = document.querySelector('.getAllInfo');
+        function showDrinkInfo() {
+            var drinkName = prompt('Введите название напитка: ', 'Test Drink').toLowerCase().trim();
+            var getDrinkInfo = (drinkName) ? drinkStorage.getValue(drinkName) : 0;
+            var resultHTML = '';
 
-        addRecipe.addEventListener('click', function () {
-            DrinkStorage.addValue(askDrinkName(), askRecipe());
-        })
-        showRecipe.addEventListener('click', deletePrevious)
-        showRecipe.addEventListener('click', function () {
-            var getDrinkName = prompt('Введите название напитка');
-            getDrinkName.toLowerCase();
-            var check = DrinkStorage.getValue(getDrinkName);
+            if (getDrinkInfo) {
+                var print1 = 'Напиток: ' + drinkName + '<br>';
+                var print2 = 'Алкогольный: ' + getDrinkInfo.alcohole + '<br>';
+                var print3 = 'Рецепт приготовления: ' + getDrinkInfo.recipe + '<br>';
 
-            if (!check) {
-                alert('Такого рецепта нет');
+                resultHTML = print1 + print2 + print3;
             } else {
-                var elDiv = document.createElement('div');
-                elDiv.setAttribute('class', 'showInfo');
-                wrapper.appendChild(elDiv);
-                elDiv.innerHTML = `напиток: <b>${getDrinkName}</b> <br> алкогольный <b>${check[0]}</b> <br> рецепт приготовления: <br> <b>${check[1]}</b>`;
-
+                resultHTML = 'Ошибка! Такого напитка нет!'
             }
-        })
-        deleteRecipe.addEventListener('click', function () {
-            var getDrinkName = prompt('Введите название напитка');
-            getDrinkName.toLowerCase();
-            var check = DrinkStorage.getValue(getDrinkName);
+            document.getElementById('message').innerHTML = resultHTML;
+        }
 
-            if (!check) {
-                alert('Рецепта этого напитка нет в списке');
+        function removeDrink() {
+            var drinkName = prompt('Какой напиток необходимо удалить?', 'Test Drink').toLowerCase().trim();
+            var delDrinkInfo = drinkStorage.deleteValue(drinkName);
+            var resultHTML = '';
+
+            if (delDrinkInfo) {
+                resultHTML = 'Информация о напитке ' + drinkName + ' удалена!';
             } else {
-                DrinkStorage.deleteValue(getDrinkName);
-                alert('Рецепт напитка удален')
+                resultHTML = 'Такого напитка нет';
             }
-        })
-        showAllRecipes.addEventListener('click', deletePrevious)
-        showAllRecipes.addEventListener('click', function () {
-            var check = DrinkStorage.getKeys();
+            document.getElementById('message').innerHTML = resultHTML;
+        }
 
-            if (check.length === 0) {
-                alert('В хранилище нет ни одного рецепта');
-            } else {
-                var elWrapper = document.createElement('div');
-                elWrapper.setAttribute('class', 'showInfo');
+        function showDrinksMenu() {
+            var showMenuInfo = drinkStorage.getKeys();
+            var resultHTML = '';
 
-                for (var i = 0; i < check.length; i++) {
-                    var elDiv = document.createElement('div');
-                    elDiv.textContent = i + 1 + '. ' + check[i];
-                    elWrapper.appendChild(elDiv);
-                    wrapper.appendChild(elWrapper)
+            if (showMenuInfo.length) {
+                for (var i = 0; i < showMenuInfo.length; i++) {
+                    resultHTML += (i + 1) + '. ' + showMenuInfo[i] + '<br>';
                 }
+            } else {
+                resultHTML = 'В меню пусто. Добавьте напитки.';
             }
-
-        })
+            document.getElementById('message').innerHTML = resultHTML;
+        }
 
     </script>
 </body>
